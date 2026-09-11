@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <title>Sorteio do Dia do Cliente | Parrilla</title>
+  <meta name="description" content="Participe do Sorteio do Dia do Cliente da Parrilla e concorra com nossos patrocinadores.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="topbar">
+    <div class="brand-mini"><span>PARRILLA • SORTEIO</span></div>
+    <a href="#regras" class="top-link">Como participar</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <div class="organizer">
+          <span class="organizer-label">REALIZAÇÃO</span>
+          <img src="parrilla-logo-white.png" class="parrilla-hero-logo" alt="Parrilla 1001">
+        </div>
+        <span class="eyebrow">UMA EXPERIÊNCIA EXCLUSIVA</span>
+        <img src="sorteio-logo.png" class="giveaway-logo" alt="Sorteio do Dia do Cliente">
+        <p class="hero-sub">20 patrocinadores. Uma participação. Uma chance de levar o prêmio.</p>
+        <button class="gold-btn primary" onclick="goTo('participar')">QUERO PARTICIPAR <span>→</span></button>
+        <div class="hero-note"><span class="pulse-dot"></span> Participação gratuita</div>
+      </div>
+      <div class="scroll-cue">DESLIZE PARA CONTINUAR <span>↓</span></div>
+    </section>
+
+    <section id="regras" class="section rules">
+      <div class="section-head">
+        <span class="eyebrow">PASSO A PASSO</span>
+        <h2>Participar é <em>simples.</em></h2>
+        <p>Complete as etapas abaixo e confirme sua participação.</p>
+      </div>
+      <div class="steps">
+        <article class="step"><b>01</b><div><h3>Siga a Parrilla</h3><p>Acompanhe o perfil oficial da realizadora.</p></div></article>
+        <article class="step"><b>02</b><div><h3>Siga os 20 patrocinadores</h3><p>Abra cada perfil pelo próprio site e siga as páginas.</p></div></article>
+        <article class="step"><b>03</b><div><h3>Confirme seus dados</h3><p>Use seu Instagram e WhatsApp para evitar participações duplicadas.</p></div></article>
+        <article class="step"><b>04</b><div><h3>Pronto!</h3><p>Você receberá um número de participação para guardar.</p></div></article>
+      </div>
+    </section>
+
+    <section id="participar" class="section sponsors-section">
+      <div class="section-head">
+        <span class="eyebrow">ETAPA 01</span>
+        <h2>Conheça nossos <em>patrocinadores.</em></h2>
+        <p>Siga cada perfil e marque a etapa como concluída.</p>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-label"><span id="progressText">0 de 20 concluídos</span><strong id="progressPercent">0%</strong></div>
+        <div class="progress"><div id="progressBar"></div></div>
+      </div>
+
+      <div class="sponsor-grid" id="sponsorGrid"></div>
+
+      <div class="participation-card">
+        <div>
+          <span class="eyebrow">ETAPA FINAL</span>
+          <h3>Já concluiu os 20?</h3>
+          <p>Confirme seus dados para gerar uma participação única.</p>
+        </div>
+        <button class="gold-btn" id="finishBtn" onclick="openModal()">FINALIZAR PARTICIPAÇÃO →</button>
+      </div>
+    </section>
+
+    <section class="section security">
+      <div class="security-inner">
+        <div class="security-icon">✓</div>
+        <div>
+          <span class="eyebrow">PROTEÇÃO CONTRA FRAUDES</span>
+          <h2>Uma participação por perfil.</h2>
+          <p>O sistema foi desenhado para validar a participação no servidor, limitar tentativas e dificultar cadastros automatizados.</p>
+        </div>
+        <div class="security-pills"><span>ANTI-BOT</span><span>RATE LIMIT</span><span>OTP</span><span>VALIDAÇÃO</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand"><img src="parrilla-logo.png" alt="Parrilla"><span>Realização Parrilla</span></div>
+    <span>© 2026 • Sorteio do Dia do Cliente</span>
+    <a href="admin.html">Área administrativa</a>
+  </footer>
+
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <span class="eyebrow">CONFIRMAR PARTICIPAÇÃO</span>
+      <h2>Está quase lá.</h2>
+      <p>Informe seus dados. Eles serão usados para impedir participações duplicadas.</p>
+      <form id="participationForm">
+        <label>Seu Instagram
+          <input id="instagram" required placeholder="@seuinstagram" maxlength="40" autocomplete="off">
+        </label>
+        <label>Seu WhatsApp
+          <input id="phone" required placeholder="(00) 00000-0000" inputmode="tel" maxlength="15" autocomplete="tel">
+        </label>
+        <label class="check"><input type="checkbox" required> Confirmo que li as regras e que os dados informados são verdadeiros.</label>
+        <div class="bot-trap" aria-hidden="true"><input id="website" tabindex="-1" autocomplete="off"></div>
+        <button class="gold-btn full" type="submit">GERAR MINHA PARTICIPAÇÃO</button>
+        <small>Proteção anti-bot ativa. Em produção, conecte este formulário ao backend + Turnstile + OTP.</small>
+      </form>
+      <div class="success" id="successBox" hidden>
+        <div class="success-number" id="ticketNumber">000000</div>
+        <h3>Participação registrada!</h3>
+        <p>Guarde seu número. Ele é sua identificação no sorteio.</p>
+        <button class="gold-btn full" onclick="closeModal()">FECHAR</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

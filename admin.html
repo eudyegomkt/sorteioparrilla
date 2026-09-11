@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin | Sorteio do Dia do Cliente</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="topbar"><div class="brand-mini"><span>ADMIN • SORTEIO</span></div><a class="top-link" href="index.html">← Voltar ao site</a></header>
+<main class="section" style="padding-top:130px">
+<div class="section-head"><span class="eyebrow">PAINEL ADMINISTRATIVO</span><h2>Controle do <em>sorteio.</em></h2><p>Área de configuração visual e preparação dos 20 patrocinadores.</p></div>
+<div class="admin-box">
+<h3>Patrocinadores</h3>
+<p class="admin-muted">Edite os nomes e links abaixo. Para uso público real, estes dados devem ficar no banco de dados do backend, nunca somente no navegador.</p>
+<div id="adminGrid"></div>
+<button class="gold-btn" onclick="saveAdmin()">SALVAR CONFIGURAÇÕES</button>
+</div>
+<div class="admin-box">
+<h3>Checklist de produção</h3>
+<ul class="checklist">
+<li>☐ Configurar domínio e HTTPS</li><li>☐ Configurar Cloudflare Turnstile</li><li>☐ Conectar banco de dados</li><li>☐ Implementar OTP por WhatsApp/SMS</li><li>☐ Implementar rate limiting no servidor</li><li>☐ Configurar regras oficiais e política de privacidade</li><li>☐ Cadastrar os 20 patrocinadores</li>
+</ul>
+</div>
+</main>
+<script>
+const defaults=Array.from({length:20},(_,i)=>({name:'Patrocinador '+String(i+1).padStart(2,'0'),instagram:''}));
+let data=JSON.parse(localStorage.getItem('sorteio_admin')||'null')||defaults;
+const grid=document.getElementById('adminGrid');
+grid.innerHTML=data.map((x,i)=>`<div class="admin-row"><b>${String(i+1).padStart(2,'0')}</b><input data-i="${i}" data-k="name" value="${x.name}" placeholder="Nome da empresa"><input data-i="${i}" data-k="instagram" value="${x.instagram}" placeholder="https://instagram.com/..."></div>`).join('');
+function saveAdmin(){
+ document.querySelectorAll('[data-i]').forEach(el=>data[el.dataset.i][el.dataset.k]=el.value);
+ localStorage.setItem('sorteio_admin',JSON.stringify(data));
+ alert('Configurações salvas neste navegador. No site público, conecte o backend para persistência real.');
+}
+</script>
+</body></html>
